@@ -2,101 +2,183 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="theme-color" content="#FFFBF7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>Ridhyara Stays - Premium Boutique Stay | Greater Noida West</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-body{font-family:'Inter',sans-serif; background:#FFFBF7}
-h1,h2,h3{font-family:'Playfair Display',serif}
+body { font-family: 'Inter', sans-serif; background: #FFFBF7; -webkit-tap-highlight-color: transparent; }
+h1, h2, h3 { font-family: 'Playfair Display', serif; }
+input, select { font-size: 16px !important; } /* Prevents iOS auto-zoom on input focus */
 </style>
 </head>
-<body class="text-[#121212]">
-<nav class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b">
-<div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-<div class="text-2xl font-bold tracking-widest"><span class="font-serif">RIDHYARA</span> <span class="font-light">STAYS</span></div>
-<a href="https://wa.me/918750630309" class="bg-[#6E2C2C] text-white px-5 py-2 rounded-full text-sm">Book on WhatsApp</a>
+<body class="text-[#121212] antialiased">
+
+<!-- Floating Toast Notification -->
+<div id="toast" class="hidden fixed top-4 left-4 right-4 max-w-sm mx-auto z-[100] bg-[#6E2C2C] text-white px-4 py-3 rounded-2xl shadow-2xl flex items-center justify-center text-sm font-medium text-center transition-all animate-bounce"></div>
+
+<!-- Navigation -->
+<nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-gray-100 transition-all">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+<div class="text-xl sm:text-2xl font-bold tracking-widest"><span class="font-serif">RIDHYARA</span> <span class="font-light">STAYS</span></div>
+<a href="https://wa.me/918750630309" class="bg-[#6E2C2C] text-white px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium active:scale-95 transition-transform shadow-sm">Book on WhatsApp</a>
 </div>
 </nav>
 
-<section class="relative min-h-[90vh] flex items-center">
-<img src="assets/hero-bg.jpg" class="absolute inset-0 w-full h-full object-cover"/>
+<!-- Hero Section -->
+<section class="relative min-h-[85vh] sm:min-h-[90vh] flex items-center">
+<img src="assets/hero-bg.jpg" class="absolute inset-0 w-full h-full object-cover" alt="Ridhyara Stays Hero"/>
 <div class="absolute inset-0 bg-black/60"></div>
-<div class="relative max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-10 w-full">
+<div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20 grid md:grid-cols-2 gap-8 sm:gap-10 w-full items-center">
 <div class="text-white">
-<h1 class="text-5xl md:text-7xl leading-tight">Stay.<br>Relax.<br>Repeat.</h1>
-<p class="mt-6 text-xl opacity-90">Premium Boutique Stay for Couples & Families in Greater Noida West &mdash; Clean &bull; Comfortable &bull; Affordable</p>
-<p class="mt-4 opacity-80">Near Galaxy Blue Sapphire Plaza, Expo Mart & Knowledge Park. Perfect for business, expo visits, college admissions or a romantic getaway.</p>
+<h1 class="text-4xl sm:text-6xl md:text-7xl leading-[1.15] font-serif">Stay.<br>Relax.<br>Repeat.</h1>
+<p class="mt-4 sm:mt-6 text-base sm:text-xl opacity-90 leading-relaxed">Premium Boutique Stay for Couples & Families in Greater Noida West &mdash; Clean &bull; Comfortable &bull; Affordable</p>
+<p class="mt-3 opacity-80 text-xs sm:text-base leading-relaxed">Near Galaxy Blue Sapphire Plaza, Expo Mart & Knowledge Park. Perfect for business, expo visits, college admissions or a romantic getaway.</p>
 </div>
-<div class="bg-white rounded-[24px] p-6 shadow-2xl">
-<h3 class="text-2xl font-bold mb-4">Check Availability</h3>
-<div class="grid grid-cols-2 gap-4">
-<div><label class="text-xs uppercase tracking-widest opacity-60">Check-in</label><input id="checkin" type="date" class="w-full border rounded-xl px-3 py-3 mt-1"/></div>
-<div><label class="text-xs uppercase tracking-widest opacity-60">Check-out</label><input id="checkout" type="date" class="w-full border rounded-xl px-3 py-3 mt-1"/></div>
+<div class="bg-white rounded-[22px] sm:rounded-[28px] p-5 sm:p-7 shadow-2xl border border-white/20">
+<h3 class="text-xl sm:text-2xl font-bold mb-4 font-serif">Check Availability</h3>
+<div class="grid grid-cols-2 gap-3 sm:gap-4">
+<div>
+  <label class="text-[11px] sm:text-xs uppercase tracking-wider font-semibold text-gray-500">Check-in</label>
+  <input id="checkin" type="date" class="w-full border border-gray-200 rounded-xl px-3 py-3 mt-1 bg-gray-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#6E2C2C]/20 focus:border-[#6E2C2C]"/>
 </div>
-<div class="mt-4"><label class="text-xs uppercase tracking-widest opacity-60">Guests</label>
-<select id="guests" class="w-full border rounded-xl px-3 py-3 mt-1"><option>1 Guest</option><option selected>2 Guests</option><option>3 Guests</option><option>4 Guests</option></select></div>
-<button onclick="bookNow()" class="w-full mt-6 bg-[#6E2C2C] text-white py-4 rounded-full font-semibold">Book Now on WhatsApp</button>
-<p class="text-xs text-center mt-3 opacity-60">Best Rate Guaranteed &bull; Instant Confirmation on WhatsApp</p>
-<p id="toast" class="hidden mt-3 text-sm text-red-600 bg-red-50 p-2 rounded"></p>
+<div>
+  <label class="text-[11px] sm:text-xs uppercase tracking-wider font-semibold text-gray-500">Check-out</label>
+  <input id="checkout" type="date" class="w-full border border-gray-200 rounded-xl px-3 py-3 mt-1 bg-gray-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#6E2C2C]/20 focus:border-[#6E2C2C]"/>
+</div>
+</div>
+<div class="mt-3.5 sm:mt-4">
+  <label class="text-[11px] sm:text-xs uppercase tracking-wider font-semibold text-gray-500">Guests</label>
+  <select id="guests" class="w-full border border-gray-200 rounded-xl px-3 py-3 mt-1 bg-gray-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#6E2C2C]/20 focus:border-[#6E2C2C]">
+    <option>1 Guest</option>
+    <option selected>2 Guests</option>
+    <option>3 Guests</option>
+    <option>4 Guests</option>
+  </select>
+</div>
+<button onclick="bookNow()" class="w-full mt-5 sm:mt-6 bg-[#6E2C2C] hover:bg-[#582222] active:scale-[0.98] transition-all text-white py-3.5 sm:py-4 rounded-full font-semibold text-base sm:text-lg shadow-lg shadow-[#6E2C2C]/20">Book Now on WhatsApp</button>
+<p class="text-[11px] sm:text-xs text-center mt-3 text-gray-500">Best Rate Guaranteed &bull; Instant Confirmation on WhatsApp</p>
+</div>
+</div>
+</section>
+
+<!-- Room Categories -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+<div class="text-center md:text-left mb-8">
+  <h2 class="text-3xl sm:text-4xl font-bold font-serif">Curated Stays</h2>
+  <p class="text-sm sm:text-base text-gray-600 mt-2">Designed for comfort, privacy, and memorable moments.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-6">
+<div class="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+<img src="assets/couples-retreat.jpg" class="h-56 sm:h-64 w-full object-cover" alt="Couple's Retreat"/>
+<div class="p-5 sm:p-6">
+  <h3 class="text-xl font-bold font-serif">Couple's Retreat</h3>
+  <p class="mt-2 text-sm text-gray-600 leading-relaxed">Romantic mood lighting, burgundy headboard, designer 3D wall, fairy lights &mdash; photo-ready.</p>
+  <button onclick="bookNow('Couple\'s Retreat')" class="mt-4 text-[#6E2C2C] font-semibold text-sm active:opacity-70 inline-flex items-center gap-1">Enquire on WhatsApp &rarr;</button>
+</div>
+</div>
+<div class="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+<img src="assets/family-comfort.jpg" class="h-56 sm:h-64 w-full object-cover" alt="Family Comfort"/>
+<div class="p-5 sm:p-6">
+  <h3 class="text-xl font-bold font-serif">Family Comfort</h3>
+  <p class="mt-2 text-sm text-gray-600 leading-relaxed">Spacious layout, large wardrobe, blackout curtains, home-like comfort.</p>
+  <button onclick="bookNow('Family Comfort')" class="mt-4 text-[#6E2C2C] font-semibold text-sm active:opacity-70 inline-flex items-center gap-1">Enquire on WhatsApp &rarr;</button>
+</div>
+</div>
+<div class="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+<img src="assets/work-and-stay.jpg" class="h-56 sm:h-64 w-full object-cover" alt="Work & Stay"/>
+<div class="p-5 sm:p-6">
+  <h3 class="text-xl font-bold font-serif">Work & Stay</h3>
+  <p class="mt-2 text-sm text-gray-600 leading-relaxed">Work desk, WiFi, kitchenette with fridge & microwave, near business hubs.</p>
+  <button onclick="bookNow('Work & Stay')" class="mt-4 text-[#6E2C2C] font-semibold text-sm active:opacity-70 inline-flex items-center gap-1">Enquire on WhatsApp &rarr;</button>
+</div>
 </div>
 </div>
 </section>
 
-<section class="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-3 gap-6">
-<div class="bg-white border rounded-2xl overflow-hidden">
-<img src="assets/couples-retreat.jpg" class="h-64 w-full object-cover"/>
-<div class="p-6"><h3 class="text-xl font-bold">Couple's Retreat</h3><p class="mt-2 text-sm opacity-70">Romantic mood lighting, burgundy headboard, designer 3D wall, fairy lights &mdash; photo-ready.</p><button onclick="bookNow('Couple\'s Retreat')" class="mt-4 text-[#6E2C2C] font-semibold">Enquire on WhatsApp &rarr;</button></div>
-</div>
-<div class="bg-white border rounded-2xl overflow-hidden">
-<img src="assets/family-comfort.jpg" class="h-64 w-full object-cover"/>
-<div class="p-6"><h3 class="text-xl font-bold">Family Comfort</h3><p class="mt-2 text-sm opacity-70">Spacious layout, large wardrobe, blackout curtains, home-like comfort.</p><button onclick="bookNow('Family Comfort')" class="mt-4 text-[#6E2C2C] font-semibold">Enquire on WhatsApp &rarr;</button></div>
-</div>
-<div class="bg-white border rounded-2xl overflow-hidden">
-<img src="assets/work-and-stay.jpg" class="h-64 w-full object-cover"/>
-<div class="p-6"><h3 class="text-xl font-bold">Work & Stay</h3><p class="mt-2 text-sm opacity-70">Work desk, WiFi, kitchenette with fridge & microwave, near business hubs.</p><button onclick="bookNow('Work & Stay')" class="mt-4 text-[#6E2C2C] font-semibold">Enquire on WhatsApp &rarr;</button></div>
+<!-- Real Photos Gallery -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+<h2 class="text-3xl sm:text-4xl font-bold text-center font-serif">Real Photos, Real Comfort</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-6 sm:mt-8">
+<img src="assets/gallery-1.jpg" class="rounded-xl sm:rounded-2xl h-44 sm:h-64 object-cover w-full shadow-sm hover:scale-[1.02] transition-transform" alt="Gallery Photo 1"/>
+<img src="assets/gallery-2.jpg" class="rounded-xl sm:rounded-2xl h-44 sm:h-64 object-cover w-full shadow-sm hover:scale-[1.02] transition-transform" alt="Gallery Photo 2"/>
+<img src="assets/gallery-3.jpg" class="rounded-xl sm:rounded-2xl h-44 sm:h-64 object-cover w-full shadow-sm hover:scale-[1.02] transition-transform" alt="Gallery Photo 3"/>
+<img src="assets/gallery-4.jpg" class="rounded-xl sm:rounded-2xl h-44 sm:h-64 object-cover w-full shadow-sm hover:scale-[1.02] transition-transform" alt="Gallery Photo 4"/>
 </div>
 </section>
 
-<section class="max-w-7xl mx-auto px-6 py-10">
-<h2 class="text-4xl font-bold text-center">Real Photos, Real Comfort</h2>
-<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-<img src="assets/gallery-1.jpg" class="rounded-2xl h-64 object-cover w-full"/>
-<img src="assets/gallery-2.jpg" class="rounded-2xl h-64 object-cover w-full"/>
-<img src="assets/gallery-3.jpg" class="rounded-2xl h-64 object-cover w-full"/>
-<img src="assets/gallery-4.jpg" class="rounded-2xl h-64 object-cover w-full"/>
-</div>
-</section>
-
-<footer class="bg-[#121212] text-white mt-10 py-10 text-center">
-<p class="text-lg">Ridhyara Stays &mdash; Greater Noida West</p>
-<p class="opacity-60 mt-2">&#128205; Near Galaxy Blue Sapphire Plaza | &#128222; +91 87506 30309 | &#9993;&#65039; hello@ridhyarastays.com</p>
-<p class="opacity-40 mt-6 text-sm">&copy; 2026 Ridhyara Stays &bull; Clean &bull; Comfortable &bull; Affordable</p>
+<!-- Footer -->
+<footer class="bg-[#121212] text-white mt-12 py-12 pb-24 md:pb-12 text-center px-4">
+<p class="text-lg font-serif">Ridhyara Stays &mdash; Greater Noida West</p>
+<p class="opacity-75 mt-2 text-xs sm:text-sm leading-relaxed">&#128205; Near Galaxy Blue Sapphire Plaza | &#128222; <a href="tel:+918750630309" class="underline hover:opacity-100">+91 87506 30309</a> | &#9993;&#65039; <a href="mailto:hello@ridhyarastays.com" class="underline hover:opacity-100">hello@ridhyarastays.com</a></p>
+<p class="opacity-40 mt-6 text-xs">&copy; 2026 Ridhyara Stays &bull; Clean &bull; Comfortable &bull; Affordable</p>
 </footer>
 
+<!-- Sticky Mobile Booking Bar (Mobile Only) -->
+<div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-gray-200 px-4 py-3 flex items-center justify-between shadow-[0_-4px_20px_rgba(0,0,0,0.08)] pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+  <div>
+    <div class="text-xs uppercase tracking-wider text-gray-500 font-medium">Boutique Stay</div>
+    <div class="text-sm font-bold text-[#121212] font-serif">Greater Noida West</div>
+  </div>
+  <button onclick="scrollToBooking()" class="bg-[#6E2C2C] active:scale-95 transition-transform text-white px-5 py-2.5 rounded-full font-semibold text-xs sm:text-sm shadow-md flex items-center gap-1.5">
+    <span>Book on WhatsApp</span>
+    <span>&rarr;</span>
+  </button>
+</div>
+
 <script>
+// Prevent past date selections
+window.addEventListener('DOMContentLoaded', () => {
+  const today = new Date().toISOString().split('T')[0];
+  const ci = document.getElementById('checkin');
+  const co = document.getElementById('checkout');
+  if (ci) ci.min = today;
+  if (co) co.min = today;
+  if (ci) {
+    ci.addEventListener('change', () => {
+      if (co) co.min = ci.value;
+    });
+  }
+});
+
 function showToast(msg){
  const t=document.getElementById('toast');
- t.innerText=msg; t.classList.remove('hidden');
- setTimeout(()=>t.classList.add('hidden'),3000);
+ t.innerText=msg;
+ t.classList.remove('hidden');
+ setTimeout(()=>t.classList.add('hidden'), 3500);
 }
+
+function scrollToBooking(){
+  const box = document.getElementById('checkin');
+  if(box) box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  setTimeout(() => { if(box) box.focus(); }, 400);
+}
+
 function formatDate(d){
  if(!d) return '';
  const date=new Date(d);
  return date.toLocaleDateString('en-IN',{day:'numeric', month:'short', year:'numeric'});
 }
+
 function bookNow(space){
  const ci=document.getElementById('checkin').value;
  const co=document.getElementById('checkout').value;
  const guests=document.getElementById('guests').value;
+ 
  if(!ci || !co){
    showToast('Please select check-in and check-out dates');
+   scrollToBooking();
    return;
  }
  if(new Date(co) <= new Date(ci)){
    showToast('Check-out must be after check-in');
+   scrollToBooking();
    return;
  }
+ 
  let msg='';
  if(space){
    msg=`Hello Ridhyara Stays! %F0%9F%91%8B%0A%0AI would like to book *${space}* from *${formatDate(ci)}* to *${formatDate(co)}* for *${guests}*.%0A%0APlease confirm availability and best rate.%0A%0AThank you!`;
