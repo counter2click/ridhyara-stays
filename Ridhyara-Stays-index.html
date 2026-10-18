@@ -24,7 +24,7 @@ input, select { font-size: 16px !important; } /* Prevents iOS auto-zoom on input
 <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-gray-100 transition-all">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
 <div class="text-xl sm:text-2xl font-bold tracking-widest"><span class="font-serif">RIDHYARA</span> <span class="font-light">STAYS</span></div>
-<a href="https://wa.me/918750630309" class="bg-[#6E2C2C] text-white px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium active:scale-95 transition-transform shadow-sm">Book on WhatsApp</a>
+<button onclick="bookHeader()" class="bg-[#6E2C2C] hover:bg-[#582222] text-white px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium active:scale-95 transition-transform shadow-sm cursor-pointer">Book on WhatsApp</button>
 </div>
 </nav>
 
@@ -135,7 +135,7 @@ input, select { font-size: 16px !important; } /* Prevents iOS auto-zoom on input
     <div class="text-xs uppercase tracking-wider text-gray-500 font-medium">Boutique Stay</div>
     <div class="text-sm font-bold text-[#121212] font-serif">Greater Noida West</div>
   </div>
-  <button onclick="scrollToBooking()" class="bg-[#6E2C2C] active:scale-95 transition-transform text-white px-5 py-2.5 rounded-full font-semibold text-xs sm:text-sm shadow-md flex items-center gap-1.5">
+  <button onclick="handleStickyBooking()" class="bg-[#6E2C2C] active:scale-95 transition-transform text-white px-5 py-2.5 rounded-full font-semibold text-xs sm:text-sm shadow-md flex items-center gap-1.5 cursor-pointer">
     <span>Book on WhatsApp</span>
     <span>&rarr;</span>
   </button>
@@ -210,6 +210,31 @@ function showToast(msg){
  setTimeout(()=>t.classList.add('hidden'), 3500);
 }
 
+
+function bookHeader(){
+ const ci = document.getElementById('checkin') ? document.getElementById('checkin').value : '';
+ const co = document.getElementById('checkout') ? document.getElementById('checkout').value : '';
+ const guests = document.getElementById('guests') ? document.getElementById('guests').value : '2 Guests';
+ 
+ let msg = '';
+ if (ci && co && new Date(co) > new Date(ci)) {
+   msg = `Hello Ridhyara Stays! %F0%9F%91%8B%0A%0AI would like to book a stay from *${formatDate(ci)}* to *${formatDate(co)}* for *${guests}*.%0A%0APlease confirm availability and best rate.%0A%0AThank you!`;
+ } else {
+   msg = `Hello Ridhyara Stays! %F0%9F%91%8B%0A%0AI would like to enquire about room availability and rates in Greater Noida West.%0A%0APlease share details and best rates.%0A%0AThank you!`;
+ }
+ const url = `https://wa.me/918750630309?text=${msg}`;
+ window.open(url, '_blank');
+}
+
+function handleStickyBooking(){
+ const ci = document.getElementById('checkin') ? document.getElementById('checkin').value : '';
+ const co = document.getElementById('checkout') ? document.getElementById('checkout').value : '';
+ if (ci && co && new Date(co) > new Date(ci)) {
+   bookNow();
+ } else {
+   scrollToBooking();
+ }
+}
 function scrollToBooking(){
   const box = document.getElementById('checkin');
   if(box) box.scrollIntoView({ behavior: 'smooth', block: 'center' });
